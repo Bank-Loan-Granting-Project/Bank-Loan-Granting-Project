@@ -88,32 +88,32 @@ def show_depend(prediction, df, new_data):
 
 def show_income(prediction, df, dist, new_data):
     fig = px.histogram(df, x = "income_annum", color="loan_status", marginal=dist, hover_data=df.columns)
-    fig.add_vline(x=new_data.income_annum[0], line_dash = 'dash', line_color = 'firebrick')
+    fig.add_vline(x=new_data.income_annum[0], line_dash = 'dash', line_color = '#F61F0C')
     return fig
 
 def show_loan_am(prediction, df, dist, new_data):
     fig = px.histogram(df, x = "loan_amount", color="loan_status", marginal=dist, hover_data=df.columns)
-    fig.add_vline(x=new_data.loan_amount[0], line_dash = 'dash', line_color = 'firebrick')
+    fig.add_vline(x=new_data.loan_amount[0], line_dash = 'dash', line_color = '#F61F0C')
     return fig
 
 def show_loan_year(prediction, df, dist, new_data):
     fig = px.histogram(df, x = "loan_term", color="loan_status", marginal=dist, hover_data=df.columns)
-    fig.add_vline(x=new_data.loan_term[0], line_dash = 'dash', line_color = 'firebrick')
+    fig.add_vline(x=new_data.loan_term[0], line_dash = 'dash', line_color = '#F61F0C')
     return fig
 
 def show_cred_sc(prediction, df, dist, new_data):
     fig = px.histogram(df, x = "cibil_score", color="loan_status", marginal=dist, hover_data=df.columns)
-    fig.add_vline(x=new_data.cibil_score[0], line_dash = 'dash', line_color = 'firebrick')
+    fig.add_vline(x=new_data.cibil_score[0], line_dash = 'dash', line_color = '#F61F0C')
     return fig
 
 def show_res_val(prediction, df, dist, new_data):
     fig = px.histogram(df, x = "residential_assets_value", color="loan_status", marginal=dist, hover_data=df.columns)
-    fig.add_vline(x=new_data.residential_assets_value[0], line_dash = 'dash', line_color = 'firebrick')
+    fig.add_vline(x=new_data.residential_assets_value[0], line_dash = 'dash', line_color = '#F61F0C')
     return fig
 
 def show_com_val(prediction, df, dist, new_data):
     fig = px.histogram(df, x = "commercial_assets_value", color="loan_status", marginal=dist, hover_data=df.columns)
-    fig.add_vline(x=new_data.commercial_assets_value[0], line_dash = 'dash', line_color = 'firebrick')
+    fig.add_vline(x=new_data.commercial_assets_value[0], line_dash = 'dash', line_color = '#F61F0C')
     return fig
 
 @st.cache_data
