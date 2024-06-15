@@ -273,6 +273,8 @@ def form_callback():
 # start session state
 state = st.session_state
 
+st.set_page_config(layout='wide')
+
 if "submitted" not in state:
     state.submitted = False
 
