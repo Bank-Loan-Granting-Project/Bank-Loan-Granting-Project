@@ -24,11 +24,33 @@ def load_model():
 def simple_pie_chart(prediction, df, new_data, col_name):
     df = df.drop(df.tail(1).index)
     val = df[col_name].value_counts()
-    colors = ['#05dde0', '#05dde0']
-    if prediction == 1:
-        colors[1] = '#00567A'
+    colors = ['#00567A', '#00567A']
+    
+    if col_name == "loan_status":
+        highlight_label = " Rejected"
+        if prediction == 1:
+            highlight_label = " Approved"
+        for i, label in enumerate(val.index):
+            if label == highlight_label:
+                colors[i] = '#05dde0'
+    elif col_name == "education":
+        education = new_data["education"][0]
+        highlight_label = " Not Graduate"
+        if education == 1:
+            highlight_label = " Graduate"
+        for i, label in enumerate(val.index):
+            if label == highlight_label:
+                colors[i] = '#05dde0'
     else:
-        colors[0] = '#00567A'
+        self_employment = new_data["self_employed"][0]
+        highlight_label = " No"
+        if self_employment == 1:
+            highlight_label = " Yes"
+        for i, label in enumerate(val.index):
+            if label == highlight_label:
+                colors[i] = '#05dde0'
+
+    
     fig = go.Figure(data=[go.Pie(labels=val.index, values=val)])
     fig.update_traces(marker=dict(colors=colors))
     return fig
@@ -66,19 +88,19 @@ def hue_pie_chart(prediction, df, new_data, col_name):
     return fig
 
 def sunburst_chart(prediction, df, new_data, col_name):
-    data = [[col_name, df[col_name].count]]
-    fig = px.sunburst(df, path=[col_name, 'loan_status'], color='loan_status',color_discrete_map={'(?)':'#F8E6AE', ' Approved': '#003952', ' Rejected':'#F61F0C'})
+    fig = px.sunburst(df, path=[col_name, 'loan_status'], color='loan_status', color_discrete_map={'(?)':'#F8E6AE', ' Approved': '#003952', ' Rejected':'#F61F0C'})
     fig.update_traces(textinfo="label+percent parent", insidetextorientation='horizontal')
     return fig
 
 def show_depend(prediction, df, new_data):
     data = df["no_of_dependents"].value_counts()
+    no_of_dependent = new_data["no_of_dependents"][0]
     colors = ['lightslategray',] * data.size
     idx = 0
     for i, j in enumerate(data.index):
         if(j == no_of_dependent):
             idx = i
-    colors[i] = '#F61F0C'
+    colors[idx] = '#F61F0C'
     fig = go.Figure(data=[go.Bar(
         x=data.index,
         y=data,
@@ -286,7 +308,7 @@ if "submitted" not in state:
     state.submitted = False
 
 if "edu" not in state:
-    state.dist = "Simple pie chart"
+    state.edu = "Simple pie chart"
 
 if "self_emp" not in state:
     state.self_emp = "Simple pie chart"
@@ -295,19 +317,19 @@ if "income" not in state:
     state.income = "Box"
 
 if "loan_am" not in state:
-    state.income = "Box"
+    state.loan_am = "Box"
 
 if "loan_year" not in state:
-    state.income = "Box"
+    state.loan_year = "Box"
 
 if "cred_sc" not in state:
-    state.income = "Box"
+    state.cred_sc = "Box"
 
 if "res_val" not in state:
-    state.income = "Box"
+    state.res_val = "Box"
 
 if "com_val" not in state:
-    state.income = "Box"
+    state.com_val = "Box"
 
 # load model
 model = load_model()
