@@ -273,7 +273,14 @@ def form_callback():
 # start session state
 state = st.session_state
 
+#set display into wide mode
 st.set_page_config(layout='wide')
+
+#set color into web page 
+base="light"
+primaryColor="#7edabd"
+secondaryBackgroundColor="#f7e5b2"
+textColor="#003b54"
 
 if "submitted" not in state:
     state.submitted = False
